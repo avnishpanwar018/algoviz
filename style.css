@@ -186,10 +186,10 @@ h1 {
 }
 
 .controls-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.25rem;
-  align-items: center;
+  align-items: flex-end;
 }
 
 /* Control Elements styling */
@@ -197,6 +197,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  flex: 1 1 200px;
 }
 
 .control-label {
@@ -667,3 +668,162 @@ footer p a:hover {
     font-size: 0.65rem;
   }
 }
+
+/* ==========================================================================
+   Search-Specific Visualizer Bar States
+   ========================================================================== */
+.array-bar.discarded {
+  opacity: 0.12 !important;
+  filter: grayscale(1);
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+.array-bar.found {
+  background-color: #06b6d4 !important; /* Cyan glow success */
+  border-color: #06b6d4 !important;
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.8);
+  z-index: 10;
+  transform: scaleY(1.02);
+}
+
+/* ==========================================================================
+   Landing Page Layout & Components
+   ========================================================================== */
+.landing-container {
+  max-width: 1000px;
+  width: 90%;
+  margin: auto;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 4rem;
+}
+
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  width: 100%;
+}
+
+.landing-card {
+  border-radius: 1.5rem;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-card);
+  padding: 3rem 2.25rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.landing-card:hover::before {
+  opacity: 1;
+}
+
+.landing-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(var(--accent-color-rgb), 0.3);
+  box-shadow: 0 12px 40px rgba(var(--accent-color-rgb), 0.18);
+  background: var(--bg-card-hover);
+}
+
+.landing-card-icon {
+  font-size: 2.5rem;
+  width: 4rem;
+  height: 4rem;
+  background: rgba(var(--accent-color-rgb), 0.1);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-light);
+  transition: transform var(--transition-fast);
+}
+
+.landing-card:hover .landing-card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.landing-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.landing-card-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.landing-card-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.landing-card-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.landing-card-features li::before {
+  content: "✦";
+  color: var(--accent-light);
+}
+
+.btn-back {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+

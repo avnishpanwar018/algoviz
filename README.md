@@ -1,6 +1,6 @@
 # 📊 AlgoViz — Algorithm Visualizer
 
-A professional, visually stunning sorting algorithm visualizer with real-time animations, audio synthesis, and side-by-side comparison mode.
+A professional, visually stunning multi-page algorithm visualizer with real-time animations, Web Audio API synthesis, side-by-side comparison mode, and complete educational HUD boards for both **Sorting** and **Searching** algorithms.
 
 ![Made with](https://img.shields.io/badge/AlgoViz-Algorithm%20Visualizer-blueviolet?style=for-the-badge)
 
@@ -8,35 +8,24 @@ A professional, visually stunning sorting algorithm visualizer with real-time an
 
 ## ✨ Features
 
-### 🎯 Core Visualization
-- **6 Sorting Algorithms** — Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort, and Heap Sort
-- **Real-time Bar Animations** — Color-coded bars indicate comparisons (yellow), swaps (red), pivots (blue), and sorted elements (green)
-- **Live Statistics HUD** — Track comparisons, swaps/writes, and elapsed time in real-time
+### 🔍 Searching Visualizer Module
+- **Supported Algorithms** — Linear Search and Binary Search
+- **Auto-Sorting Sync** — Binary Search automatically sorts the visualizer array instantly before running to demonstrate search ranges correctly. Selecting Linear Search restores the original unsorted array.
+- **Interactive Target Selector** — Type in a custom numerical target to search for, or click the `🎯 Random` button to pick a target directly from the array.
+- **Search Range Dimming** — Elements excluded from the search bounds fade dynamically to `12%` opacity, emphasizing the shrinking search space (perfect for Binary Search).
+- **Ascending/Descending Chimes** — Play a custom 4-tone ascending success arpeggio when the target is found, and a sad 2-tone descending failure chime when a target is missing.
 
-### ⚡ Interactive Controls
-- **Array Size Slider** — Dynamically adjust the number of elements (10–150)
-- **Speed Slider** — Control animation speed from slow-motion to near-instant
-- **Pause / Resume** — Freeze and resume the sorting process at any point
-- **Stop / Reset** — Halt a running sort or regenerate a fresh random array
+### 📊 Sorting Visualizer Module
+- **Supported Algorithms** — Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort, and Heap Sort.
+- **Visual Swaps & Pivots** — Color-coded elements highlight comparisons (yellow), swaps (red), pivots (blue), and sorted states (green).
+- **Real-Time Statistics** — Live counter tracking exact compares, swaps/writes, and execution times.
 
-### 🔀 Comparison Mode
-- **Single Mode** — Visualize one algorithm at a time
-- **Dual (Comparison) Mode** — Run two different algorithms side-by-side on the same initial array to compare performance in real-time
-
-### 🔊 Audio Synthesis
-- **Web Audio API** — Pitch-mapped sound effects where each bar's value is mapped to a frequency (160 Hz – 1000 Hz)
-- **Stereo Panning** — In comparison mode, Visualizer A pans left and Visualizer B pans right for spatial audio separation
-- Toggle sound on/off with one click
-
-### 🎨 Theming
-- **Dark Mode** (default) — Sleek glassmorphism design with purple accent colors
-- **Light Mode** — Clean, bright interface with adapted color palette
-- Smooth theme transitions
-
-### 📚 Educational Details
-- **Algorithm Description** — Detailed explanation of how each algorithm works
-- **Complexity Table** — Best, Average, and Worst-case time complexity, space complexity, and stability for every algorithm
-- Automatically updates when you switch algorithms
+### ⚡ Global Interactions
+- **Premium Landing Page** — Glassmorphic hub allowing users to select either the Sorting or Searching modules.
+- **Dual Comparison Mode** — Run two different algorithms side-by-side on identical generated arrays (Sorting or Searching) to compare execution speed and complexity in real-time.
+- **Global Sliders** — Customize Array Size (10–150 elements) and Speed (from slow-motion steps up to near-instant runs).
+- **Audio synthesis** — Dynamic pitch-mapped feedback using Web Audio API where note frequencies are proportional to the array heights. Supports Left/Right stereo-panning in comparison mode.
+- **Dark/Light Mode** — Sleek glassmorphic dark interface by default, with an elegant light theme switch.
 
 ---
 
@@ -44,11 +33,19 @@ A professional, visually stunning sorting algorithm visualizer with real-time an
 
 ```
 algoviz/
-├── index.html        # Main HTML structure and layout
-├── style.css         # Complete styling with dark/light themes
-├── script.js         # UI controller, state management, and Visualizer class
-├── algorithms.js     # Async sorting algorithm implementations
-└── README.md         # You are here
+│
+├── index.html                   # Root landing page (Navigation Hub)
+├── style.css                    # Shared global stylesheet (Glassmorphism design system)
+│
+├── searching/                   # Searching Module
+│   ├── index.html               # Searching UI structure
+│   ├── script.js                # Searching event controller and UI orchestrator
+│   └── algorithms.js            # Searching algorithms (Linear, Binary)
+│
+└── sorting/                     # Sorting Module
+    ├── index.html               # Sorting UI structure
+    ├── script.js                # Sorting event controller and UI orchestrator
+    └── algorithms.js            # Sorting algorithms (Bubble, Selection, etc.)
 ```
 
 ---
@@ -56,10 +53,10 @@ algoviz/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- A modern web browser (Chrome, Firefox, Edge, Safari)
-- No build tools, frameworks, or dependencies required
+- A modern web browser supporting Web Audio API and CSS Grid/Flexbox (Chrome, Firefox, Safari, Edge).
+- No package installs or complex developer dependencies are needed!
 
-### Installation
+### Installation & Launch
 
 1. **Clone the repository**
    ```bash
@@ -67,58 +64,51 @@ algoviz/
    cd algoviz
    ```
 
-2. **Open `index.html`** in your browser
+2. **Start a local HTTP server** (highly recommended for Audio Context features to run smoothly):
    ```bash
-   # Option 1: Direct file open
-   open index.html          # macOS
-   start index.html         # Windows
+   # Using Python (Built-in)
+   python -m http.server 8000
 
-   # Option 2: Use a local server (recommended for audio features)
-   npx serve .
+   # Using Node.js/npx
+   npx http-server -p 8000
    ```
 
-That's it — no `npm install`, no build step.
-
----
-
-## 🎮 How to Use
-
-| Step | Action |
-|------|--------|
-| 1 | Adjust **Array Size** and **Speed** using the sliders |
-| 2 | Select a sorting algorithm from the dropdown |
-| 3 | Click **✦ Generate Array** to create a new random dataset |
-| 4 | Click **▶ Visualize** to start the sort animation |
-| 5 | Use **⏸ Pause** / **▶ Resume** to control playback |
-| 6 | Click **✕ Stop** to halt, or **↺ Reset** to regenerate |
-| 7 | Toggle **Comparison Mode** to run two algorithms side-by-side |
-| 8 | Enable **Sound** for audio feedback during sorting |
-| 9 | Switch between **Dark** and **Light** themes |
+3. **Open browser** and visit `http://localhost:8000`.
 
 ---
 
 ## 📊 Supported Algorithms
 
+### Searching
+| Algorithm | Best | Average | Worst | Space | Requires Sorted Array |
+|-----------|------|---------|-------|-------|-----------------------|
+| **Linear Search** | O(1) | O(n) | O(n) | O(1) | ❌ No |
+| **Binary Search** | O(1) | O(log n) | O(log n) | O(1) | ✅ Yes |
+
+### Sorting
 | Algorithm | Best | Average | Worst | Space | Stable |
 |-----------|------|---------|-------|-------|--------|
-| Bubble Sort | O(n) | O(n²) | O(n²) | O(1) | ✅ Yes |
-| Selection Sort | O(n²) | O(n²) | O(n²) | O(1) | ❌ No |
-| Insertion Sort | O(n) | O(n²) | O(n²) | O(1) | ✅ Yes |
-| Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) | ✅ Yes |
-| Quick Sort | O(n log n) | O(n log n) | O(n²) | O(log n) | ❌ No |
-| Heap Sort | O(n log n) | O(n log n) | O(n log n) | O(1) | ❌ No |
+| **Bubble Sort** | O(n) | O(n²) | O(n²) | O(1) | ✅ Yes |
+| **Selection Sort** | O(n²) | O(n²) | O(n²) | O(1) | ❌ No |
+| **Insertion Sort** | O(n) | O(n²) | O(n²) | O(1) | ✅ Yes |
+| **Merge Sort** | O(n log n) | O(n log n) | O(n log n) | O(n) | ✅ Yes |
+| **Quick Sort** | O(n log n) | O(n log n) | O(n²) | O(log n) | ❌ No |
+| **Heap Sort** | O(n log n) | O(n log n) | O(n log n) | O(1) | ❌ No |
 
 ---
 
 ## 🎨 Color Legend
 
-| Color | Meaning |
-|-------|---------|
-| 🟡 **Yellow** | Elements being compared |
-| 🔴 **Red** | Elements being swapped or written |
-| 🔵 **Blue** | Current pivot element (Quick Sort) |
-| 🟢 **Green** | Element is in its final sorted position |
-| 🟣 **Purple** | Default unsorted element |
+### Searching Colors
+- 🟡 **Yellow** | Element being compared to target
+- 🔘 **Dimmed (12% Opacity)** | Discarded elements (excluded from search space)
+- 🔵 **Cyan Glow** | Target element found!
+
+### Sorting Colors
+- 🟡 **Yellow** | Elements being compared
+- 🔴 **Red** | Elements being swapped or written
+- 🔵 **Blue** | Current pivot element (Quick Sort)
+- 🟢 **Green** | Element in its final sorted position
 
 ---
 

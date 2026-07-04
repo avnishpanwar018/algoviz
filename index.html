@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AlgoViz — an interactive sorting algorithm visualizer with real-time stats, audio synthesis, comparison mode, and educational complexities.">
+  <meta name="description" content="AlgoViz — An interactive algorithm visualizer with sound effects and side-by-side comparison mode for sorting and searching.">
   <title>AlgoViz — Algorithm Visualizer</title>
   
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navigation Header -->
+  <!-- Landing Page Header -->
   <header>
     <div class="logo-container">
       <div class="logo-icon">📊</div>
@@ -26,190 +26,68 @@
     </div>
     
     <div class="global-settings">
-      <div class="btn-group">
-        <button id="mode-single" class="btn btn-toggle btn-primary">Single Mode</button>
-        <button id="mode-dual" class="btn btn-toggle">Comparison Mode</button>
-      </div>
-      <button id="sound-toggle" class="btn btn-toggle"><span>🔇</span> Sound OFF</button>
       <button id="theme-toggle" class="btn btn-toggle"><span>☀</span> Light Mode</button>
     </div>
   </header>
 
-  <!-- Control Panel -->
-  <section class="controls-container">
-    <div class="controls-grid">
-      <!-- Size Control -->
-      <div class="control-group">
-        <span class="control-label">Array Size <span id="size-val" class="control-val">60</span></span>
-        <input type="range" id="size-slider" min="10" max="150" value="60">
-      </div>
-      
-      <!-- Speed Control -->
-      <div class="control-group">
-        <span class="control-label">Speed <span id="speed-val" class="control-val">75%</span></span>
-        <input type="range" id="speed-slider" min="1" max="100" value="75">
-      </div>
+  <!-- Main Landing Content -->
+  <main class="landing-container">
+    <h2 class="hero-title">Interactive Algorithm Visualizer</h2>
+    <p class="hero-subtitle">Step inside sorting and searching execution. Observe, hear, and understand complexities in real-time through glassmorphic HUD boards and custom audio synthesis.</p>
+    
+    <!-- Visualizer Modules Selection Grid -->
+    <section class="landing-grid">
+      <!-- Searching Card -->
+      <a href="searching/index.html" class="landing-card">
+        <div class="landing-card-icon">🔍</div>
+        <h3 class="landing-card-title">Searching Visualizer</h3>
+        <p class="landing-card-text">Track element searching visually. Select custom search targets and observe Binary Search prune sorted array segments logarithmically.</p>
+        <ul class="landing-card-features">
+          <li>Linear Search &amp; Binary Search animations</li>
+          <li>Interactive Target number selector &amp; Random targets</li>
+          <li>Auto-sorting arrays for Binary Search runs</li>
+          <li>Success ascending and failure descending audio chimes</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Open Searching Visualizer</button>
+      </a>
 
-      <!-- Action Controls -->
-      <div class="control-group" style="grid-column: span 2; display: flex; flex-direction: row; gap: 0.5rem; justify-content: flex-end; align-items: flex-end;">
-        <button id="btn-generate" class="btn"><span>✦</span> Generate Array</button>
-        <button id="btn-start" class="btn btn-primary"><span>▶</span> Visualize</button>
-        <button id="btn-pause" class="btn" disabled><span>⏸</span> Pause</button>
-        <button id="btn-stop" class="btn btn-danger"><span>↺</span> Reset</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Workspace / Visualizer Dashboard -->
-  <main>
-    <div id="visualization-layout" class="visualization-layout">
-      <!-- Visualizer Card A -->
-      <div id="viz-card-a" class="viz-card">
-        <div class="viz-card-header">
-          <div class="viz-card-title">
-            <span class="viz-card-badge">Visualizer A</span>
-          </div>
-          <select id="algo-select-a">
-            <option value="bubbleSort">Bubble Sort</option>
-            <option value="selectionSort">Selection Sort</option>
-            <option value="insertionSort">Insertion Sort</option>
-            <option value="mergeSort">Merge Sort</option>
-            <option value="quickSort" selected>Quick Sort</option>
-            <option value="heapSort">Heap Sort</option>
-          </select>
-        </div>
-
-        <!-- Visual Board and Stats HUD -->
-        <div id="viz-board-a" class="viz-board-wrapper">
-          <div class="stats-hud">
-            <div class="stat-pill">
-              <span class="stat-label">Compares:</span>
-              <span id="stats-compare-a" class="stat-value">0</span>
-            </div>
-            <div class="stat-pill">
-              <span class="stat-label">Swaps/Writes:</span>
-              <span id="stats-swap-a" class="stat-value">0</span>
-            </div>
-            <div class="stat-pill">
-              <span class="stat-label">Time:</span>
-              <span id="stats-time-a" class="stat-value">0.00s</span>
-            </div>
-          </div>
-          <!-- Bars injected via JavaScript -->
-        </div>
-      </div>
-
-      <!-- Visualizer Card B (Hidden by default, shown in Dual Mode) -->
-      <div id="viz-card-b" class="viz-card" style="display: none;">
-        <div class="viz-card-header">
-          <div class="viz-card-title">
-            <span class="viz-card-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.2);">Visualizer B</span>
-          </div>
-          <select id="algo-select-b">
-            <option value="bubbleSort">Bubble Sort</option>
-            <option value="selectionSort">Selection Sort</option>
-            <option value="insertionSort">Insertion Sort</option>
-            <option value="mergeSort">Merge Sort</option>
-            <option value="quickSort">Quick Sort</option>
-            <option value="heapSort" selected>Heap Sort</option>
-          </select>
-        </div>
-
-        <!-- Visual Board and Stats HUD -->
-        <div id="viz-board-b" class="viz-board-wrapper">
-          <div class="stats-hud">
-            <div class="stat-pill">
-              <span class="stat-label">Compares:</span>
-              <span id="stats-compare-b" class="stat-value">0</span>
-            </div>
-            <div class="stat-pill">
-              <span class="stat-label">Swaps/Writes:</span>
-              <span id="stats-swap-b" class="stat-value">0</span>
-            </div>
-            <div class="stat-pill">
-              <span class="stat-label">Time:</span>
-              <span id="stats-time-b" class="stat-value">0.00s</span>
-            </div>
-          </div>
-          <!-- Bars injected via JavaScript -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Educational Details Grid -->
-    <div id="edu-grid" class="edu-grid">
-      <!-- Edu Card A -->
-      <div id="edu-card-a" class="edu-card">
-        <div class="edu-header">
-          <h2 class="edu-title">Algorithm Details</h2>
-        </div>
-        <p class="edu-description">Select an algorithm to see its details and properties here.</p>
-        
-        <div class="complexity-table-wrapper">
-          <table class="complexity-table">
-            <thead>
-              <tr>
-                <th>Time (Best)</th>
-                <th>Time (Avg)</th>
-                <th>Time (Worst)</th>
-                <th>Space Complexity</th>
-                <th>Stability</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code class="best-a">O(n)</code></td>
-                <td><code class="avg-a">O(n²)</code></td>
-                <td><code class="worst-a">O(n²)</code></td>
-                <td><code class="space-a">O(1)</code></td>
-                <td><code class="stable-a">Yes</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Edu Card B (Hidden by default, shown in Dual Mode) -->
-      <div id="edu-card-b" class="edu-card" style="display: none;">
-        <div class="edu-header">
-          <h2 class="edu-title">Algorithm Details</h2>
-        </div>
-        <p class="edu-description">Select an algorithm to see its details and properties here.</p>
-        
-        <div class="complexity-table-wrapper">
-          <table class="complexity-table">
-            <thead>
-              <tr>
-                <th>Time (Best)</th>
-                <th>Time (Avg)</th>
-                <th>Time (Worst)</th>
-                <th>Space Complexity</th>
-                <th>Stability</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code class="best-b">O(n)</code></td>
-                <td><code class="avg-b">O(n²)</code></td>
-                <td><code class="worst-b">O(n²)</code></td>
-                <td><code class="space-b">O(1)</code></td>
-                <td><code class="stable-b">Yes</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+      <!-- Sorting Card -->
+      <a href="sorting/index.html" class="landing-card">
+        <div class="landing-card-icon">📊</div>
+        <h3 class="landing-card-title">Sorting Visualizer</h3>
+        <p class="landing-card-text">Compare 6 sorting algorithms side-by-side on random identical arrays. Watch elements swap, pivot, and lock into sorted positions.</p>
+        <ul class="landing-card-features">
+          <li>Bubble, Selection, and Insertion Sorts</li>
+          <li>Quick, Merge, and Heap Sorts</li>
+          <li>Dual Comparison (side-by-side) Mode</li>
+          <li>Real-time compares, swaps, and execution timers</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Open Sorting Visualizer</button>
+      </a>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p><strong>AlgoViz</strong> — Algorithm Visualizer</p>
-    <p>Compare algorithms side-by-side on uniform random inputs. Enable Audio Synthesis for pitch-mapped sound effects.</p>
+  <!-- Landing Footer -->
+  <footer style="margin-top: 4rem;">
+    <p><strong>AlgoViz</strong> — Designed using HTML, CSS, and Vanilla JavaScript.</p>
+    <p>Explore algorithms visually and auditorily. Open either module to start.</p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="algorithms.js"></script>
-  <script src="script.js"></script>
+  <!-- Theme Script (Synchronizes Light/Dark Mode) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+          document.body.removeAttribute('data-theme');
+          themeToggle.innerHTML = '<span>☀</span> Light Mode';
+        } else {
+          document.body.setAttribute('data-theme', 'light');
+          themeToggle.innerHTML = '<span>🌙</span> Dark Mode';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
