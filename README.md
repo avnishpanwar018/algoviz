@@ -2,7 +2,10 @@
 
 A professional, visually stunning Single Page Application (SPA) algorithm visualizer built with **React + Vite**. It features real-time animations, Web Audio API synthesis, side-by-side comparison mode, and complete educational HUD boards for both **Sorting** and **Searching** algorithms.
 
-![Made with](https://img.shields.io/badge/AlgoViz-Algorithm%20Visualizer-blueviolet?style=for-the-badge)
+[![Made with](https://img.shields.io/badge/AlgoViz-Algorithm%20Visualizer-blueviolet?style=for-the-badge)](#)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Netlify-00AD9F?style=for-the-badge&logo=netlify)](https://avnish-algoviz.netlify.app)
+
+🔗 **Live Demo**: [avnish-algoviz.netlify.app](https://avnish-algoviz.netlify.app)
 
 ---
 
