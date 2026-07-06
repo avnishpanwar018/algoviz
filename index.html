@@ -1,93 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AlgoViz — An interactive algorithm visualizer with sound effects and side-by-side comparison mode for sorting and searching.">
-  <title>AlgoViz — Algorithm Visualizer</title>
-  
-  <!-- Preconnect to Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- Landing Page Header -->
-  <header>
-    <div class="logo-container">
-      <div class="logo-icon">📊</div>
-      <div>
-        <h1>AlgoViz</h1>
-      </div>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AlgoViz — An interactive algorithm visualizer with sound effects and side-by-side comparison mode for sorting and searching.">
+    <title>AlgoViz — Algorithm Visualizer</title>
     
-    <div class="global-settings">
-      <button id="theme-toggle" class="btn btn-toggle"><span>☀</span> Light Mode</button>
-    </div>
-  </header>
-
-  <!-- Main Landing Content -->
-  <main class="landing-container">
-    <h2 class="hero-title">Interactive Algorithm Visualizer</h2>
-    <p class="hero-subtitle">Step inside sorting and searching execution. Observe, hear, and understand complexities in real-time through glassmorphic HUD boards and custom audio synthesis.</p>
-    
-    <!-- Visualizer Modules Selection Grid -->
-    <section class="landing-grid">
-      <!-- Searching Card -->
-      <a href="searching/index.html" class="landing-card">
-        <div class="landing-card-icon">🔍</div>
-        <h3 class="landing-card-title">Searching Visualizer</h3>
-        <p class="landing-card-text">Track element searching visually. Select custom search targets and observe Binary Search prune sorted array segments logarithmically.</p>
-        <ul class="landing-card-features">
-          <li>Linear Search &amp; Binary Search animations</li>
-          <li>Interactive Target number selector &amp; Random targets</li>
-          <li>Auto-sorting arrays for Binary Search runs</li>
-          <li>Success ascending and failure descending audio chimes</li>
-        </ul>
-        <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Open Searching Visualizer</button>
-      </a>
-
-      <!-- Sorting Card -->
-      <a href="sorting/index.html" class="landing-card">
-        <div class="landing-card-icon">📊</div>
-        <h3 class="landing-card-title">Sorting Visualizer</h3>
-        <p class="landing-card-text">Compare 6 sorting algorithms side-by-side on random identical arrays. Watch elements swap, pivot, and lock into sorted positions.</p>
-        <ul class="landing-card-features">
-          <li>Bubble, Selection, and Insertion Sorts</li>
-          <li>Quick, Merge, and Heap Sorts</li>
-          <li>Dual Comparison (side-by-side) Mode</li>
-          <li>Real-time compares, swaps, and execution timers</li>
-        </ul>
-        <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Open Sorting Visualizer</button>
-      </a>
-    </section>
-  </main>
-
-  <!-- Landing Footer -->
-  <footer style="margin-top: 4rem;">
-    <p><strong>AlgoViz</strong> — Designed using HTML, CSS, and Vanilla JavaScript.</p>
-    <p>Explore algorithms visually and auditorily. Open either module to start.</p>
-  </footer>
-
-  <!-- Theme Script (Synchronizes Light/Dark Mode) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const themeToggle = document.getElementById('theme-toggle');
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = document.body.getAttribute('data-theme');
-        if (currentTheme === 'light') {
-          document.body.removeAttribute('data-theme');
-          themeToggle.innerHTML = '<span>☀</span> Light Mode';
-        } else {
-          document.body.setAttribute('data-theme', 'light');
-          themeToggle.innerHTML = '<span>🌙</span> Dark Mode';
-        }
-      });
-    });
-  </script>
-</body>
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

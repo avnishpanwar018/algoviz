@@ -96,3 +96,5 @@ const SearchingAlgorithms = {
     return -1;
   }
 };
+
+export default SearchingAlgorithms;

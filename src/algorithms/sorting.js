@@ -230,3 +230,5 @@ const SortingAlgorithms = {
     }
   }
 };
+
+export default SortingAlgorithms;
